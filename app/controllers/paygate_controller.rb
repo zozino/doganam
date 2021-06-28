@@ -149,7 +149,6 @@ class PaygateController < ApplicationController
             demande.total_amount_paid = 0
             demande.status = demande.status.to_i | (2**Demande.cond_status_accepte)
 
-            trans.
         else
             demande.total_amount_paid += trans.amount  
             if demande.total_amount_paid >= demande.amount_to_repay

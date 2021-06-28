@@ -134,7 +134,7 @@
                 </p>
                 <% if is_infopublic %> 
                 <p>Vous avez accepté  de partager vos</br>
-                    informations personnels
+                    informations personnelles avec le prêteur
                 </p>
                 <% end %> 
                 <% if is_expire %> 
@@ -155,7 +155,7 @@
                         <% else                     
                             dt_lim = @demande.date_disbursed.to_time + @demande.nombre_de_jour
                         %>
-                    A rembourser au plus tard : le <%= @demande.repayment_date.strftime("%d/%m/%Y %H:%M:%S") %>
+                    A rembourser au plus grand tard : le <%= @demande.repayment_date.strftime("%d/%m/%Y %H:%M:%S") %>
                         <% end %>
                     <% end %>    
                 </p>
@@ -173,7 +173,7 @@
                     </form>
                     <% end %>
                 <% end %>
-                 <a href="/histopretssollicites" class="btn btn-dark">Annuler</a>
+                 <a href="/histopretssollicites" class="btn btn-dark">Retour</a>
               </div>
             </BODY>
           </HTML>

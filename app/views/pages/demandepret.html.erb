@@ -407,7 +407,7 @@ input {
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
                 <div class="card-body">
-                   <h1 class="title" style="color: black;"> <strong>Soumisson de prêt</strong></h1>
+                   <h1 class="title" style="color: black;"> <strong>Soumission de prêt</strong></h1>
                     <form id="monformulaire" method="post" action="/demandepretvalider">
                     <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
                         <div class="row row-space">
@@ -490,13 +490,14 @@ input {
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label"style="color: black;">Numéro de téléphone</label>
-                                    <input class="input--style-4" type="text" name="phone" placeholder="Numéro Flooz(Moov)" required autofocus>
+                                    <input class="input--style-4" type="text" placeholder="Ex:97936820 (Num Moov)" name="phone" required autofocus>
                                 </div>
                             </div>
                         </div>
                            <div class="input-group">
                                     <div class="p-t-10">
-                                        <label class="label"style="color: black;">Voulez-vous que vos informations soient visibles?</label>
+                                        <label class="label"style="color: black;">Voulez-vous que 
+                                        votre identité soit révéler aux prêteurs?</label>
                                         <label class="radio-container m-r-45">Oui
                                             <input type="radio" checked="checked" name="is_anonymous" value="false" required autofocus>
                                             <span class="checkmark"></span>
@@ -528,12 +529,12 @@ input {
                                 <div class="modal-body">
 
                                     <p><strong>Vous êtes sur le point d'envoyer une requête de demande d'aide sur la plateforme Doganam</strong></p>
-                                    <p>J'accepte envoyer une demande d'aide sur cette plateforme et j'accepte rembourser avec interêt et à defaut de remboursement dans un delai précis
-                                    les données séront publiées dans la liste noire et sur les reseau sociaux comme Facebook et WhatsApp.</p> 
+                                    <p>J'accepte soumettre une demande d'aide sur cette plateforme et j'accepte rembourser avec interêt et à defaut de remboursement dans un delai précis
+                                    les données seront publiées dans la liste noire et sur mes reseaux sociaux comme Facebook, WhatsApp et Instagram.</p> 
 
                                 </div>
                                   <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
                                   <button class="btn btn-warning">Valider</button>
                                 </div>
                             </div>
