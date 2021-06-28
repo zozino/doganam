@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nombre_de_jour: 1
+  tax: 9.99
+
+two:
+  nombre_de_jour: 1
+  tax: 9.99

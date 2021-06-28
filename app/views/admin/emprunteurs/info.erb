@@ -1,0 +1,72 @@
+<HTML>
+ <HEAD>
+  <TITLE>Doganam</TITLE>
+ </HEAD>
+
+ <BODY>
+ 
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                <div class="col-lg">
+                  
+                    <h3 class="bg-light rounded">
+                      <%= "#{@user.nom} #{@user.prenoms}, #{@user.monAge} ans, de sexe : #{@user.sexe}" %> <br/>
+                      <%= "habite dans le quartier de  #{@user.quartier}" %> <br/> 
+                      Pseudo - <%= @user.pseudo %> &nbsp; N°Phone :: <%= @user.phone %>
+                    </h3>
+
+                    <div>
+                      <h4>Carte d'identité ou carte d'élécteur</h4>
+                      <p>
+                        <img id="img_pce" 
+                        <% if @user.id_document_url.nil? || 
+                        @user.id_document_url.empty? || 
+                        !Utilisateur.asset_exists?(@user.id_document_url) %>
+                        src="" 
+                        <% else %>
+                        src="<%= asset_path @user.id_document_url %>" 
+                        <% end %>
+                        width="200" />
+                      </p>
+                    </div>
+                    <div>
+                      <h4>Photo de l'utilisateur tenant la carte dans la main</h4>
+                      <p>
+                        <img id="img_cmplt" 
+                        <% if @user.photo_url.nil? || 
+                        @user.photo_url.empty? || 
+                        !Utilisateur.asset_exists?(@user.photo_url) %>
+                        src="" 
+                        <% else %>
+                        src="<%= asset_path @user.photo_url %>" 
+                        <% end %>
+                         width="200" />
+                      </p>
+                    </div>
+
+                    <div class="p-t-15">
+                      <style>form { display: inline}</style>
+                        <%= button_to "INVALIDER", 
+                        '/admin/invalider_cmp_emp', 
+                        method: :post, :params=> {:id => @user.id}, 
+                        class: "p-2 btn btn-warning"  %>
+                        
+                        <%= button_to "VALIDER", 
+                        '/admin/valider_cmp_emp', 
+                        method: :post, :params=> {:id => @user.id}, 
+                        class: "p-2 btn btn-success"  %>
+
+                        <%= button_to "QUITTER", 
+                        '/admin/liste_en_attente_emp', 
+                        class: "p-2 btn btn-danger"  %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </BODY>
+</HTML>
+
+ 

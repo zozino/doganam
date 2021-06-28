@@ -1,0 +1,37 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  utilisateur_id: 1
+  nombre_de_jour: 1
+  taux: 9.99
+  date_accepted: 2021-04-24 19:58:12
+  date_disbursed: 2021-04-24 19:58:12
+  date_repaid: 2021-04-24 19:58:12
+  repayment_date: 2021-04-24 19:58:12
+  penalty_amount: 1
+  total_amount_paid: 1
+  lender_phone: MyString
+  is_anonymous: false
+  amount_borrowed: 1
+  amount_to_repay: 1
+  category_id: 1
+  phone: MyString
+  status: MyString
+
+two:
+  utilisateur_id: 1
+  nombre_de_jour: 1
+  taux: 9.99
+  date_accepted: 2021-04-24 19:58:12
+  date_disbursed: 2021-04-24 19:58:12
+  date_repaid: 2021-04-24 19:58:12
+  repayment_date: 2021-04-24 19:58:12
+  penalty_amount: 1
+  total_amount_paid: 1
+  lender_phone: MyString
+  is_anonymous: false
+  amount_borrowed: 1
+  amount_to_repay: 1
+  category_id: 1
+  phone: MyString
+  status: MyString

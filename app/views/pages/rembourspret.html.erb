@@ -1,0 +1,74 @@
+
+    
+    <!-- Custom styles for this template -->
+    <link href="headers.css" rel="stylesheet">
+  <!DOCTYPE html>
+    <html>
+      <head>
+      
+      </head>
+     <body>
+            <div class="container">
+              <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                  <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+                  <span class="fs-4"><strong>Doganam</strong></span>
+                </a>
+
+                <ul class="nav nav-pills">
+                  <li class="nav-item"><a href="/register" class="btn btn-light">Créer un compte</a></li>
+
+                  <li class="nav-item"><a href="/" class="btn btn-warning">Deconnexion</a></li>
+                </ul>
+              </header>
+
+              
+ 
+  
+  <!--<div class="responsive-table-line" style="margin:0px auto;max-width:700px;">-->
+
+  <h2>Remboursement de prêt</h2>
+ 
+      <form class="form-signin" action="/paygaterembourser" method="post" >
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <div class="container col-md-6">
+          <div class="row">
+            <div class="col-xs-4 col-md-6">Montant emprunté:</div>
+            <div class="col-xs-4 col-md-6"><%= number_with_delimiter(@demande.amount_borrowed, delimiter: " ") %></div>  
+          </div>
+          <div class="row">
+            <div class="col-xs-6 col-md-6">+ Intéret</div>
+            <div class="col-xs-6 col-md-6"><%= number_with_delimiter((@demande.amount_borrowed * @demande.taux).floor, delimiter: " ") %></div>
+          </div>
+          <% if @demande.repayment_date < DateTime.now && @demande.date_repaid != nil %>
+          <div class="row">
+            <div class="col-xs-6 col-md-6">+ Retard</div>
+            <div class="col-xs-6 col-md-6"><%= number_with_delimiter((@demande.amount_borrowed * @demande.taux).floor, delimiter: " ") %></div>
+          </div>          
+          <% end %>
+          <div class="row">
+            <div class="col-xs-6 col-md-6"></div>
+            <div class="col-xs-6 col-md-6" style="border-top: 1px solid black">
+              <%= number_with_delimiter(@demande.amount_to_repay, delimiter: " ") %>
+            </div>
+          </div>
+        </div>
+
+        <br/>
+        <div>
+           <label for="phone" class="sr-only">Numéro de phone</label>
+           <input type="hidden" name="id_demande" value="<%= @demande.id %>" />
+           <input type="hidden" name="amount" value="<%= @demande.amount_to_repay %>" />
+          <input type="phone" id="inputEmail" class="" placeholder="Uniquement Flooz" name="phone" required autofocus></br>
+        </div>
+        <br/>
+        <div>
+          <button class="btn btn-warning">Valider</button>
+
+          <a href="/evolutiondemande" class="btn btn-light">Annuler</a>
+        </div>
+      </form>
+    <!--</div>-->  
+  </div>
+</body>
+</html>

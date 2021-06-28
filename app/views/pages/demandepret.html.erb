@@ -1,0 +1,569 @@
+
+<style>
+  
+
+/* ==========================================================================
+   #GRID
+   ========================================================================== */
+
+
+.row-space {
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -moz-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.col-2 {
+  width: -webkit-calc((100% - 30px) / 2);
+  width: -moz-calc((100% - 30px) / 2);
+  width: calc((100% - 30px) / 2);
+}
+
+@media (max-width: 767px) {
+  .col-2 {
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   #BOX-SIZING
+   ========================================================================== */
+html {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+*, *:before, *:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+/* ==========================================================================
+   #PAGE WRAPPER
+   ========================================================================== */
+.page-wrapper {
+  min-height: 100vh;
+}
+
+body {
+  font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h4 {
+  font-size: 18px;
+}
+
+h5 {
+  font-size: 15px;
+}
+
+h6 {
+  font-size: 13px;
+}
+
+/* ==========================================================================
+   #BACKGROUND
+   ========================================================================== */
+.bg-blue {
+  background: #FFA500;
+}
+
+.bg-red {
+  background: #FFA500;
+}
+
+/* ==========================================================================
+   #SPACING
+   ========================================================================== */
+.p-t-100 {
+  padding-top: 100px;
+}
+
+.p-t-130 {
+  padding-top: 130px;
+}
+
+.p-t-180 {
+  padding-top: 180px;
+}
+
+.p-t-20 {
+  padding-top: 20px;
+}
+
+.p-t-15 {
+  padding-top: 15px;
+}
+
+.p-t-10 {
+  padding-top: 10px;
+}
+
+.p-t-30 {
+  padding-top: 30px;
+}
+
+.p-b-100 {
+  padding-bottom: 100px;
+}
+
+.m-r-45 {
+  margin-right: 45px;
+}
+
+/* ==========================================================================
+   #WRAPPER
+   ========================================================================== */
+.wrapper {
+  margin: 0 auto;
+}
+
+.wrapper--w960 {
+  max-width: 960px;
+}
+
+.wrapper--w780 {
+  max-width: 780px;
+}
+
+.wrapper--w680 {
+  max-width: 680px;
+}
+
+/* ==========================================================================
+   #BUTTON
+   ========================================================================== */
+.btn {
+  display: inline-block;
+  line-height: 50px;
+  padding: 0 50px;
+  -webkit-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  font-size: 18px;
+  color: #fff;
+  font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
+}
+
+.btn--radius {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.btn--radius-2 {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.btn--pill {
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+}
+
+.btn--green {
+  background: #57b846;
+}
+
+.btn--green:hover {
+  background: #4dae3c;
+}
+
+.btn--blue {
+  background: #4272d7;
+}
+
+.btn--blue:hover {
+  background: #3868cd;
+}
+
+/* ==========================================================================
+   #FORM
+   ========================================================================== */
+input {
+  outline: none;
+  margin: 0;
+  border: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  width: 100%;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.input--style-4 {
+  line-height: 50px;
+  background: #fafafa;
+  -webkit-box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
+  -moz-box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 0 20px;
+  font-size: 16px;
+  color: #666;
+  -webkit-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.label {
+  font-size: 16px;
+  color: #555;
+  text-transform: capitalize;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.radio-container {
+  display: inline-block;
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #666;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.radio-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.radio-container input:checked ~ .checkmark {
+  background-color: #e5e5e5;
+}
+
+.radio-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.radio-container .checkmark:after {
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  background: #57b846;
+}
+
+.checkmark {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #e5e5e5;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  -webkit-box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
+  -moz-box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 22px;
+}
+
+.input-group-icon {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  font-size: 18px;
+  color: #999;
+  right: 18px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   #TITLE
+   ========================================================================== */
+.title {
+  font-size: 24px;
+  color: black;
+  font-weight: 400;
+  margin-bottom: 40px;
+}
+
+/* ==========================================================================
+   #CARD
+   ========================================================================== */
+.card {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background: #fff;
+}
+
+.card-4 {
+  background: #fff;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+}
+
+.card-4 .card-body {
+  padding: 57px 65px;
+  padding-bottom: 65px;
+}
+
+@media (max-width: 767px) {
+  .card-4 .card-body {
+    padding: 50px 40px;
+  }
+}
+
+</style>
+
+<HTML>
+ <HEAD>
+  <TITLE>Doganam</TITLE>
+ </HEAD>
+
+ <BODY>
+  <div class="container">
+              <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                  <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+                  <span class="fs-4"><strong>Doganam</strong></span>
+                </a>
+
+                <ul class="nav nav-pills">
+                  <li class="nav-item"><a href="/" class="btn btn-warning">Deconnexion</a></li>
+              </header>
+ <div class="service_block">
+        <div class="service_icon"> <span><img src="images/logo.png" width="250" alt="aide" /></span> </div>
+      </div>
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                   <h1 class="title" style="color: black;"> <strong>Soumisson de prêt</strong></h1>
+                    <form id="monformulaire" method="post" action="/demandepretvalider">
+                    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label" style="color: black;">Pseudo </label>
+                                    <!--
+                                    <input class="input--style-4" type="text" name="pseudo" required autofocus>
+                                    -->
+                                </div>
+                                <div class="input-group">
+                                    <label class="label"><%= @user.pseudo %> </label>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label" style="color: black;">Montant</label>
+                                    <input class="input--style-4" type="text" onkeypress="return onlyNumberKey(event)" name="amount_borrowed" required autofocus>
+                                </div>
+                                <script>
+                                    function onlyNumberKey(evt) {
+                                          
+                                        // Only ASCII charactar in that range allowed
+                                        var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+                                        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+                                            return false;
+                                        return true;
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label"style="color: black;">Quartier</label>
+                                </div>
+                                <div class="input-group">
+                                    <label class="label"><%= @user.quartier %> </label>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label"style="color: black;">Delai de remboursement</label>
+
+                                     <input id="nbre" type="hidden" name="nombre_de_jour" value=0/>
+                                     <input id="taux" type="hidden" name="taux" value=0/>
+                                    <div class="p-t-10">
+                                        <% cpt = 0 %>
+                                        <% @deadlines.each do |d| %>
+                                          <% cpt += 1 %>
+                                          <label class="radio-container m-r-45">
+                                              <%= d.nombre_de_jour%> jours -- taux <%= Integer(d.tax * 100) %>%
+                                              <input type="radio" 
+                                              id="d<%= d.id%>"
+                                              name="dead_id" 
+                                              value="<%= d.id%>"
+                                              oninput="addDeadLine(<%= d.id%>, <%= d.nombre_de_jour%>, <%= d.tax%>);
+                                              choose_deadline()"
+
+                                              required autofocus>
+                                              <span class="checkmark"></span>
+                                          </label>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label for="motifs" style="color: black;">Motifs de prêt:</label>
+                                        <select name="category_id" id="motifs">
+                                            <option value="">--Séléctionner un choix--</option>
+                                        <% @categories.each do |cat| %>
+                                            <option value="<%= cat.id %>"><%= cat.nom %></option>
+                                        <% end %>
+                                        </select>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label"style="color: black;">Numéro de téléphone</label>
+                                    <input class="input--style-4" type="text" name="phone" placeholder="Numéro Flooz(Moov)" required autofocus>
+                                </div>
+                            </div>
+                        </div>
+                           <div class="input-group">
+                                    <div class="p-t-10">
+                                        <label class="label"style="color: black;">Voulez-vous que vos informations soient visibles?</label>
+                                        <label class="radio-container m-r-45">Oui
+                                            <input type="radio" checked="checked" name="is_anonymous" value="false" required autofocus>
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="radio-container">Non
+                                            <input type="radio" name="is_anonymous" value="true" required autofocus>
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-t-15">
+                            <!-- Trigger the modal with a button -->
+                          <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Soumettre
+                          </button>
+
+                          </div>
+
+                          <!-- Modal -->
+                          <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="staticBackdropLabel">Avertissement</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <p><strong>Vous êtes sur le point d'envoyer une requête de demande d'aide sur la plateforme Doganam</strong></p>
+                                    <p>J'accepte envoyer une demande d'aide sur cette plateforme et j'accepte rembourser avec interêt et à defaut de remboursement dans un delai précis
+                                    les données séront publiées dans la liste noire et sur les reseau sociaux comme Facebook et WhatsApp.</p> 
+
+                                </div>
+                                  <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                  <button class="btn btn-warning">Valider</button>
+                                </div>
+                            </div>
+                          </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+  <script>
+    var liste_deadlines =  {}
+
+    function addDeadLine(id, nbj, tx){
+      obj = {"nombre_de_jour": nbj, "taux": tx};
+      liste_deadlines[id] = obj;
+    }
+
+    function choose_deadline(){
+      x = $("input[name='dead_id']:checked").val();
+      
+      deadline = liste_deadlines[x];
+      
+      document.getElementById("nbre").value = deadline["nombre_de_jour"];
+      document.getElementById("taux").value = deadline["taux"];
+    }
+  </script>
+
+  </BODY>
+ </HTML>

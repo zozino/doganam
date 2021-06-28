@@ -1,0 +1,54 @@
+
+    
+  <!DOCTYPE html>
+    
+<HTML>
+ <HEAD>
+  <TITLE>Doganam</TITLE>
+  
+ </HEAD>
+ 
+
+ <BODY>
+
+            <div class="container">
+              <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                  <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+                  <span class="fs-4"><strong>Doganam</strong></span>
+                </a>
+
+                <ul class="nav nav-pills">
+                  <li class="nav-item"><a href="/register" class="btn btn-light">Créer un compte</a></li>
+
+                  <li class="nav-item"><a href="/" class="btn btn-warning">Deconnexion</a></li>
+              </header>
+  
+  <div class="responsive-table-line" style="margin:0px auto;max-width:700px;">
+
+
+  <h1>Accepter un pret</h1>
+  <div>
+    <p>Nom :<%= @user.nom %></p>
+    <p>prenoms: <%= @user.prenoms %>  </p>
+    <p>sexe: <%= @user.sexe %> </p>
+    <p> Age: <%= @user.age + Utilisateur.years_between_dates(@user.created_at) %></p>
+    <p> Quartier: <%= @user.quartier %></p>
+
+    <form class="sr-only" method="post" action="/paygateaccepterpret">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <input type="hidden" name="id_demande" value="<%= @demande.id %>"/>
+      <p>
+        <label for="phone" class="sr-only">Numéro de phone</label>
+        <input type="phone" id="inputEmail" class="" placeholder="Uniquement Flooz" name="phone" required autofocus>
+     </p>
+      <p>Montant : <%= @demande.amount_borrowed %></br>
+      A payer avant le :<% dtnow = DateTime.now; dt = dtnow + @demande.nombre_de_jour * 1.day.seconds %>
+        <%= dt.strftime("%d/%m/%Y %H:%M:%S") %>  (<%= @demande.nombre_de_jour%> j)                 
+      </p>
+        <button class="btn btn-warning">Valider</button>
+        <a href="/listedemandesprets" class="btn btn-dark">Annuler</a>
+      </div>
+    </form>
+</BODY>
+</HTML>

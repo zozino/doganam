@@ -1,0 +1,157 @@
+    
+    <link href="headers.css" rel="stylesheet">
+  <!DOCTYPE html>
+    <html>
+      <head>
+     <body>
+            <div class="container">
+              <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                  <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+                  <span class="fs-4"><strong>Doganam</strong></span>
+                </a>
+
+                <ul class="nav nav-pills">
+                  <li class="nav-item"><a href="/register" class="btn btn-light">Créer un compte</a></li>
+
+                <li class="nav-item"><a href="/" class="btn btn-warning">Deconnexion</a></li>
+              </header>
+
+        <div class="service_block">
+           <div class="service_icon"> <span><img src="images/logo.png" width="250" alt="aide" /></span> </div>
+        </div>
+
+      </head>
+<br/>
+<br/>
+<br/>
+
+<h2 class="title">Historique des prêts accordés</h2></br>
+<div class="card" style="background-color:#fefefe">
+<h3>Suivez les instructions</h3>
+<p>1. Vous saississez votre numéro de téléphone</p>
+<p>2. vous recevrez un code de validation par SMS</p>
+<p>3. Vous saissirez ensuite votre code pour afficher l'historique</p>
+</div>
+
+    <div class="container" style="margin-top:2em; max-width:700px;  font-size:1.2em;">
+      <form action="/histopretsaccordes" method="post">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+
+              <div class="row row-space">
+                <div class="col-6">
+                    <div class="sr-only">
+                        <label class="label" style="color:black; text-align:center;">Numero de téléphone</label>
+                        <% if @num_phone == nil %>
+                        <input class="sr-only" size="10" type="phone" name="phone" value="<%= @num_phone %>" required autofocus>
+                        
+                        <% else %>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <input type="hidden" name="phone" value="<%= @num_phone %>" />
+                        <label class="label" style="color:black;"><%= @num_phone %></label>
+                        <% end %>
+                    </div>
+                </div>
+                <div class="col-6">
+                  <% if @num_phone == nil %>
+                    <div class="sr-only">
+                      <label class="label" style="display:block;color:black;">Recevoir SMS</label>
+                      <button class="btn btn-dark">Cliquer ici</button>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+              <div class="row row-space" style="font-size:0.5em"> &nbsp;</div>
+                <% if @num_phone != nil && (@code == nil || @otp.nil?) %>
+                <div class="row row-space">
+                    <div class="col-6">
+                        <div class="sr-only">
+                            <label class="label" style="color:black; display:block;">Code SMS</label>
+                            <input class="input--style-4" size = "10" type="text" name="code" required autofocus>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        &nbsp;
+                        <div class="sr-only">
+                          <button class="btn btn-warning">Afficher la liste</button>
+                        </div>
+                    </div>
+                </div>
+                <% end %>
+
+
+      </form>
+    </div>
+
+<div class="table-responsive" style="margin:0px auto;max-width:700px;">
+  <% if @liste.length() == 0 %>
+    <% if @liste_affiche %>
+      <div>
+        <h1>Aucun prêt n'a été accordé</h1>
+      </div>
+    <% end %>
+  <% else %>
+  <table class="table table-bordered table-condensed table-body-center" >
+    <thead>
+      <tr>
+      <th>Pseudo</th>
+      <th>Quartier</th>
+      <th>Sexe</th>
+      <th>Age</th>
+      <th>Numéro de téléphone</th>
+      <th>Date Prêt</th>
+      <th>Delai</th>
+      <th>Date limite</th>
+      <th>Taux appliqué</th>
+      <th>Montant Prêté</th>
+      <th>Intérêt</th>
+      <th>Retard</th>
+      <th>Montant à Payer</th>
+      <th>Payé le</th>
+    </thead>
+    <tbody>
+      <% @liste.each do |ligne| %>
+    
+      <tr>
+        <td><%= ligne["pseudo"] %></td>        
+        <td><%= ligne["quartier"] %></td>
+        <td><%= ligne["sexe"] %></td>
+        <td><%= ligne["age"] + Utilisateur.years_between_dates(ligne["user_created_at"]) %></td>
+        <td><%= ligne["phone"] %></td>
+        <td>
+          <%=  DateTime.parse(ligne["date_disbursed"]).strftime("%d/%m/%Y %H:%M:%S") %>
+        </td>     
+        <td><%= ligne["nombre_de_jour"] %>&nbsp;j</td>   
+        <td>
+          <%=  DateTime.parse(ligne["repayment_date"]).strftime("%d/%m/%Y %H:%M:%S") %>
+        </td>     
+        <td><%= (ligne["taux"] * 100).floor() %> &nbsp;%</td>        
+        <td>
+          <%= number_with_delimiter(ligne["amount_borrowed"], delimiter: " ") %>
+        </td>    
+        <td>
+          <%= number_with_delimiter((ligne["amount_borrowed"] * ligne["taux"]).floor(), delimiter: " ") %>
+        </td>    
+        <td>
+          <%= number_with_delimiter(ligne["amount_to_repay"] -
+          ligne["amount_borrowed"] -
+          (ligne["amount_borrowed"] * ligne["taux"]).floor(), 
+          delimiter: " ") %>
+        </td>    
+        <td><%= ligne["amount_to_repay"] %></td>    
+        <td>
+          <% if ligne["date_repaid"] == nil%>
+          -
+          <% else %>
+          <%= DateTime.parse(ligne["date_repaid"]).strftime("%d/%m/%Y %H:%M:%S") %>
+          <% end %>
+        </td>
+      </tr>
+      <%end%>
+    </tbody>
+  </table>
+  <% end %>
+</div>
+</body>
+</html>

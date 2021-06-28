@@ -1,0 +1,112 @@
+  <!DOCTYPE html>
+    <html>
+      <head>
+     <body>
+            <div class="container">
+              <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                  <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+                  <span class="fs-4"><strong>Doganam</strong></span>
+                </a>
+              </header>
+  <div class="responsive-table-line" style="margin:0px auto;max-width:700px;">
+    <p><strong>Recherche de demandes de prêt</strong></p>
+    <div class="background-info">
+      <form action="demandes" method="post">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <label for="phone">N° du prêteur</label>
+        <input type="phone" name="phone" value=""/>
+        <label for="quartier">Quartier</label>
+        <input type="text" name="quartier" value=""/>
+        <label for="dt_deb">Date de création Entre : </label>
+        <input type="date" name="dt_deb" value=""/>
+        <label for="dt_fin"> Et </label>
+        <input type="date" name="dt_fin" value=""/>
+        
+        <input type="submit" value="Recherche" />
+      </form>
+    </div>
+  <% if @liste_demandes.length == 0 %>
+    <div class="row">
+      <h3 class="alert-danger">Aucune demande de prêt trouvé!</h3>
+    </div>
+    <% else %>
+  <table class="table table-bordered table-condensed table-body-center" >
+  <thead>
+  <tr>
+  <th>Pseudo</th>
+  <th>Quartier</th>
+  <th>Sexe</th>
+  <th>Age</th>
+  <th>Montant</th>
+  <th>Delai</th>
+  <th>Infos</th>
+  <th>Réponse</tr>
+</thead>
+  <tbody>
+  <% @liste_demandes.each do |ligne| %>
+    <tr>
+    <td data-title="Pseudo"><%= ligne.pseudo %></td>
+    <td data-title="Quartier"><%= ligne.quartier %></td>
+    <td data-title="Feminin"><%= ligne.sexe %></td>
+    <td data-title="age"> <%= ligne.age %></td>
+    <td data-title="amount"><%= ligne.amount_borrowed %></td>
+    <td data-title="Delai"><%= ligne.nombre_de_jour %></td>
+    <td data-title="info"> 
+    <% if ligne.is_anonymous %>
+    <div class="alert-warning">
+      Non accessible
+    </div>
+    <% else %>
+    <button type="button" 
+    onclick="info_onclick('<%= ligne.nom %>', '<%= ligne.prenoms %>', '<%= ligne.phone %>')"
+     class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                          Details
+    </button>
+    <% end %>
+</td>
+    <td> <a href="/acceptpret/<%= ligne.id %>" class="btn btn-warning">Accepter</a></td>
+    </tr>
+  <% end %>
+   </tbody>
+  </table>
+  <% end %>
+  </div>
+<div class="p-t-15">
+                            <!-- Trigger the modal with a button -->
+                         
+                          </div>
+
+                          <!-- Modal -->
+                          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Details infos</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <p>Nom : <span id="nom"></span></p>
+                                  <p>Prénoms : <span id="pren"></span></p>
+                                  <p>N° Phone : <span id="phone"></span></p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+
+                          <script>
+                            function info_onclick(nom, prenoms, numphone) {
+                                document.getElementById("nom").innerHTML = nom;
+                                document.getElementById("pren").innerHTML = prenoms;
+                                document.getElementById("phone").innerHTML = numphone;
+                            }
+                          </script>
+
+
+</head>
+</body>
+</html>

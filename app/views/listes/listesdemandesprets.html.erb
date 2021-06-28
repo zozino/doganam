@@ -1,0 +1,108 @@
+    
+    <link href="headers.css" rel="stylesheet">
+  <!DOCTYPE html>
+    <html>
+      <head>
+     <body>
+            <div class="container">
+              <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                  <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+                  <span class="fs-4"><strong>Doganam</strong></span>
+                </a>
+
+                <ul class="nav nav-pills">
+                  <li class="nav-item"><a href="/register" class="btn btn-light">Créer un compte</a></li>
+
+                <li class="nav-item"><a href="/" class="btn btn-warning">Deconnexion</a></li>
+              </header>
+</head>
+
+        <div class="service_block">
+           <div class="service_icon"> <span><img src="images/logo.png" width="250" alt="aide" /></span> </div>
+        </div>
+  <div class="responsive-table-line" style="margin:0px auto;max-width:700px;">
+    <p><strong>Liste de demande de prêt</strong></p>
+  <% if @liste.length == 0 %>
+    <div class="row">
+      <h3 class="alert-danger">Aucun prêt n'a été sollicité!</h3>
+    </div>
+    <% else %>
+  <table class="table table-bordered table-condensed table-body-center" >
+  <thead>
+  <tr>
+  <th>Pseudo</th>
+  <th>Quartier</th>
+  <th>Sexe</th>
+  <th>Age</th>
+  <th>Montant</th>
+  <th>Delai</th>
+  <th>Infos</th>
+  <th>Réponse</tr>
+</thead>
+  <tbody>
+  <% @liste.each do |ligne| %>
+    <tr>
+    <td data-title="Pseudo"><%= ligne.pseudo %></td>
+    <td data-title="Quartier"><%= ligne.quartier %></td>
+    <td data-title="Feminin"><%= ligne.sexe %></td>
+    <td data-title="age"> <%= ligne.age %></td>
+    <td data-title="amount"><%= ligne.amount_borrowed %></td>
+    <td data-title="Delai"><%= ligne.nombre_de_jour %></td>
+    <td data-title="info"> 
+    <% if ligne.is_anonymous %>
+    <div class="alert-warning">
+      Non accessible
+    </div>
+    <% else %>
+    <button type="button" 
+    onclick="info_onclick('<%= ligne.nom %>', '<%= ligne.prenoms %>', '<%= ligne.phone %>')"
+     class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                          Details
+    </button>
+    <% end %>
+</td>
+    <td> <a href="/acceptpret/<%= ligne.id %>" class="btn btn-warning">Accepter</a></td>
+    </tr>
+  <% end %>
+   </tbody>
+  </table>
+  <% end %>
+  </div>
+<div class="p-t-15">
+                            <!-- Trigger the modal with a button -->
+                         
+                          </div>
+
+                          <!-- Modal -->
+                          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Details infos</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <p>Nom : <span id="nom"></span></p>
+                                  <p>Prénoms : <span id="pren"></span></p>
+                                  <p>N° Phone : <span id="phone"></span></p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+
+                          <script>
+                            function info_onclick(nom, prenoms, numphone) {
+                                document.getElementById("nom").innerHTML = nom;
+                                document.getElementById("pren").innerHTML = prenoms;
+                                document.getElementById("phone").innerHTML = numphone;
+                            }
+                          </script>
+
+
+</body>
+</html>

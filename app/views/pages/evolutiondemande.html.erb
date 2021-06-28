@@ -1,0 +1,180 @@
+    
+    <!-- en tete -->
+    <!DOCTYPE html>
+    
+    <HTML>
+     <HEAD>
+      <TITLE>Doganam</TITLE>
+      
+     </HEAD>
+     
+    
+     <BODY>
+      <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+          <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+            <span class="fs-4"><strong>Doganam</strong></span>
+          </a>
+
+          <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/register" class="btn btn-light">Créer un compte</a></li>
+
+            <li class="nav-item"><a href="/" class="btn btn-warning">Deconnexion</a></li>
+          </ul>
+        </header>
+
+        
+          
+
+      <style type="text/css">
+        .text-warnin{
+          color: black;
+        }
+      </style>
+
+  <style>
+  @media (max-width: 500px) {
+  
+  .responsive-table-line td:before { content: attr(data-title); }
+  
+  .responsive-table-line table, 
+  .responsive-table-line thead, 
+  .responsive-table-line tbody, 
+  .responsive-table-line th, 
+  .responsive-table-line td, 
+  .responsive-table-line tr { 
+  display: block; 
+  }
+   
+  .responsive-table-line thead tr { 
+  display:none;
+  }
+  
+  .responsive-table-line td { 
+  position: relative;
+  border: 0px solid transparent;
+  padding-left: 50% !important; 
+  white-space: normal;
+  text-align:right; 
+  }
+   
+  .responsive-table-line td:before { 
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 45%; 
+  padding-right: 15px; 
+  height:100%;
+  white-space: nowrap;
+  text-overflow: ellipsis !important;
+  overflow:hidden !important;
+  text-align:left;
+  background-color:#f8f8f8;
+  padding:2px;
+  }
+  
+  }
+  .invisible{
+    display: none;
+  }
+  </style>
+
+<style>
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+</style>
+
+      <div class="service_block">
+        <div class="service_icon"> <span><img src="images/logo.png" width="250" alt="aide" /></span> </div>
+      </div>
+      <div class="responsive-table-line" style="margin:0px auto;max-width:700px;"> 
+      <h3><strong>Suivi de l'évolution de la demande de prêt en cours</strong></h3></br></br> 
+      </div>
+    <%
+                    is_compte_invalide = @user.status.to_i != Utilisateur.status_active;
+
+                    is_infopublic = !@demande.is_anonymous
+                                        
+                    is_expire = false
+                    
+                    if @demande.date_disbursed == nil
+                        nbj = DateTime.now.to_time - @demande.created_at
+                        nbj /= 1.day.seconds
+                        if nbj > @demande.nombre_de_jour
+                            is_expire = true;
+                            dt = @demande.created_at.to_time + @demande.nombre_de_jour * 1.day.seconds
+
+                        end
+                    end
+
+                    cls_accord = ""
+
+                    if @demande.date_disbursed == nil 
+                        cls_accord = "class='invisible'"
+                    end
+
+                %>
+                <% if is_compte_invalide %>
+                <p>Vous utilisez un <strong>compte non valide</strong> donc cette demande est en attente de validation</p>
+                <% end %>
+                <p>Montant: <%= @demande.amount_borrowed %> </br>
+                    Prêt sollicité le : <%= @demande.created_at.strftime("%d/%m/%Y %H:%M:%S")%>
+                </p>
+                <% if is_infopublic %> 
+                <p>Vous avez accepté  de partager vos</br>
+                    informations personnels
+                </p>
+                <% end %> 
+                <% if is_expire %> 
+                 <p>Demande de prêt expirée le: <% if dt != nil %>
+                 <%= dt.strftime("%d/%m/%Y %H:%M:%S") %>
+                 <% end %> </br>
+                    Aucun prêteur ne s'est interessé
+                </p>
+                <% end %> 
+                <% if @demande.date_accepted != nil %>
+                 <p> 
+                     <% if @demande.date_disbursed != nil %> 
+                    Prêt accordé par le Numéro: <%= @demande.lender_phone %> le <%= @demande.date_disbursed.strftime("%d/%m/%Y %H:%M:%S") %>
+                </br>
+                        <% if @demande.total_amount_paid >= 0 && @demande.date_repaid != nil#@demande.amount_to_repay
+                        %>  
+                    Payé le <%= @demande.date_repaid.strftime("%d/%m/%Y %H:%M:%S")%>
+                        <% else                     
+                            dt_lim = @demande.date_disbursed.to_time + @demande.nombre_de_jour
+                        %>
+                    A rembourser au plus tard : le <%= @demande.repayment_date.strftime("%d/%m/%Y %H:%M:%S") %>
+                        <% end %>
+                    <% end %>    
+                </p>
+                <% else 
+                %>
+                <% end %>
+
+              <div class="modal-footer">
+                <% if @demande.date_disbursed != nil 
+                    if @demande.total_amount_paid <= 0 %> 
+                    <form method="POST" action="/rembourser">
+                      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                      <input type="hidden" name="id" value="<%=@demande.id%>">
+                      <button class="btn btn-warning">Rembourser</button>
+                    </form>
+                    <% end %>
+                <% end %>
+                 <a href="/histopretssollicites" class="btn btn-dark">Annuler</a>
+              </div>
+            </BODY>
+          </HTML>
+

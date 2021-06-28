@@ -1,0 +1,112 @@
+  <!DOCTYPE html>
+    <html>
+      <head>
+
+      </head>
+     <body>
+            <div class="container">
+              <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                  <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+                  <span class="fs-4"><strong>Doganam</strong></span>
+                </a>
+              </header>
+  <div class="responsive-table-line" style="margin:0px auto;max-width:700px;">
+    <p><strong>Recherche de Transactions Paygate</strong></p>
+    <div class="background-info">
+      <form action="demandes" method="post">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <label for="sender_phone">N° Phone Envoi</label>
+        <input type="phone" name="sender_phone" value=""/>
+        <label for="receiver_phone">N° Phone Receveur</label>
+        <input type="phone" name="receiver_phone" value=""/>
+        <label for="tx_reference">tx_reference: </label>
+        <input type="text" name="tx_reference" value=""/>
+        <label for="payment_reference">tx_reference: </label>
+        <input type="text" name="payment_reference" value=""/>
+        <label for="dt_deb">Date Entre : </label>
+        <input type="date" name="dt_deb" value=""/>
+        <label for="dt_fin"> Et </label>
+        <input type="date" name="dt_fin" value=""/>
+        <label for="dt_fin"> Et </label>
+        <select name="is_envoi">
+          <option value="1">Emprunt Accordé</option>
+          <option value="0">Remoursement</option>
+        </select>
+
+        
+        <input type="submit" value="Recherche" />
+      </form>
+    </div>
+  <% if @liste.length == 0 %>
+    <div class="row">
+      <h3 class="alert-danger">Aucune transaction trouvée!</h3>
+    </div>
+    <% else %>
+  <table class="table table-bordered table-condensed table-body-center" >
+  <thead>
+  <tr>
+    <th>Type de transaction</th>
+    <th>tx_reference</th>
+    <th>N°phone Envoyeur</th>
+    <th>Heure Envoi</th>
+    <th>Montant</th>
+    <th>Heure Reception</th>
+    <th>N°Phone Receveur</th>
+    <th>payment_reference</th>
+    <th>ID Demande</th>
+  </tr>
+</thead>
+  <tbody>
+  <% @liste.each do |ligne| %>
+    <tr>
+      <td><%= ligne[:is_envoi] ? "Prêt" : "Remboursement" %></td>
+      <td><%= ligne[:tx_reference] %></td>
+      <td><%= ligne[:sender_phone] %></td>
+      <td><%= ligne[:date_sent] %></td>
+      <td> <%= ligne[:amount] %></td>
+      <td><%= ligne[:date_received] %></td>
+      <td><%= ligne[:receiver_phone] %></td>
+      <td><%= ligne[:payment_reference] %></td>
+      <td> <a href="/acceptpret/<%= ligne.id %>" class="btn btn-warning">Accepter</a></td>
+    </tr>
+  <% end %>
+   </tbody>
+  </table>
+  <% end %>
+  </div>
+<div class="p-t-15">
+                            <!-- Trigger the modal with a button -->
+                         
+                          </div>
+
+                          <!-- Modal -->
+                          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Details infos</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <p>Nom : <span id="nom"></span></p>
+                                  <p>Prénoms : <span id="pren"></span></p>
+                                  <p>N° Phone : <span id="phone"></span></p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+
+                          <script>
+                            function info_onclick(nom, prenoms, numphone) {
+                                document.getElementById("nom").innerHTML = nom;
+                                document.getElementById("pren").innerHTML = prenoms;
+                                document.getElementById("phone").innerHTML = numphone;
+                            }
+                          </script>
+</body>
+</html>
