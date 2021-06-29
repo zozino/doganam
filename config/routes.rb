@@ -37,7 +37,7 @@ Rails.application.routes.draw do
   #root des pages 
   root to: 'pages#accueil'
 
-  get 'register', to:'pages#createcompte'
+  get 'createcompte', to:'pages#createcompte'
   get 'login', to:'pages#connexion'
   get 'solliciterpret', to:'pages#demandepret'
   get 'evolutiondemande', to:'pages#evolutiondemande'

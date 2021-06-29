@@ -103,7 +103,7 @@ def createcomptevalider
 
   if @user_exists != nil 
     @error = "Un compte de même n° de téléphone exist déjà!"
-    redirect_to "/register"
+    redirect_to "/createcompte"
     return
   end
 
