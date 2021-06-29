@@ -65,7 +65,7 @@ class Utilisateur < ApplicationRecord
         #    puts "original_filename pas là"
         #    return false
         #end
-        if data.nil? || data == "" || (!data.member? tempfile)
+        if data.nil? || data == ""
             puts "tempfile pas là"
             return false
         end
