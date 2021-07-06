@@ -12,6 +12,14 @@ class PagesController < ApplicationController
   def corrigercompte
 
   end
+
+  def delete_demande
+    @demande = Demande.find_by(id: params[:id])
+    
+    @demande.destroy 
+
+    redirect_to "/evolutiondemande"
+  end
   
   def infodemandeur
     @demande = Demande.find_by(id: params[:id])
