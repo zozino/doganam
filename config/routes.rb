@@ -37,6 +37,8 @@ Rails.application.routes.draw do
   #root des pages 
   root to: 'pages#accueil'
 
+
+  get 'init_data', to:'globalmethodes#init_data'
   get 'createcompte', to:'pages#createcompte'
   get 'login', to:'pages#connexion'
   get 'solliciterpret', to:'pages#demandepret'
