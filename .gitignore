@@ -1,0 +1,4 @@
+tmp/*
+app/assets/images/from_users/*
+db/development.sqlite3
+log/*.*
