@@ -36,18 +36,26 @@
   <th>Sexe</th>
   <th>Age</th>
   <th>Montant</th>
+  <th>Frais opérateur</th>
+  <th>Montant à envoyer</th>
   <th>Delai</th>
   <th>Infos</th>
   <th>Réponse</tr>
 </thead>
   <tbody>
   <% @liste.each do |ligne| %>
+  <% facteur = 1/((1 - Transaction::TAUX_ENT) * (1 - Transaction::TAUX_SORT)) 
+      montant_a_payer =  facteur * ligne.amount_borrowed   
+      frais = montant_a_payer - ligne.amount_borrowed
+  %>
     <tr>
     <td data-title="Pseudo"><%= ligne.pseudo %></td>
     <td data-title="Quartier"><%= ligne.quartier %></td>
     <td data-title="Feminin"><%= ligne.sexe %></td>
     <td data-title="age"> <%= ligne.age %></td>
     <td data-title="amount"><%= ligne.amount_borrowed %></td>
+    <td data-title="frais"><%= frais.ceil %></td>
+    <td data-title="frais"><%= montant_a_payer.ceil %></td>
     <td data-title="Delai"><%= ligne.nombre_de_jour %></td>
     <td data-title="info"> 
     <% if ligne.is_anonymous %>

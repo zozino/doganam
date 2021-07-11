@@ -52,6 +52,7 @@ Rails.application.routes.draw do
 
   post 'connexionvalider', to:'pages#connexionvalider'
   post 'register', to:'pages#createcomptevalider'
+  post 'supprimer', to: 'pages#delete_demande'
 
   # root des listes
   get 'home', to:'pages#home'

@@ -102,7 +102,10 @@
       <div class="responsive-table-line" style="margin:0px auto;max-width:700px;"> 
       <h3><strong>Suivi de l'évolution de la demande de prêt en cours</strong></h3></br></br> 
       </div>
-    <%
+      <% if @demande.nil? %>
+        <div class="label-danger">Aucune demande de pret en cours</div>
+    <% else %>
+      <%
                     is_compte_invalide = @user.status.to_i != Utilisateur.status_active;
 
                     is_infopublic = !@demande.is_anonymous
@@ -173,8 +176,17 @@
                     </form>
                     <% end %>
                 <% end %>
+
+                <% if @demande.date_disbursed.nil? ||  @demande.date_disbursed == "" %> 
+                    <form method="POST" action="/supprimer">
+                      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                      <input type="hidden" name="id" value="<%=@demande.id%>">
+                      <button class="btn btn-danger">Supprimer</button>
+                    </form>
+                <% end %>
                  <a href="/histopretssollicites" class="btn btn-dark">Retour</a>
               </div>
+            <% end %>
             </BODY>
           </HTML>
 

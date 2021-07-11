@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 tmp/cache/bootsnap/compile-cache/00/5a2e65da97d3ac
 tmp/cache/bootsnap/compile-cache/00/9be6a922ac04a5
@@ -1630,3 +1631,9 @@ log/development.log
 tmp/development_secret.txt
 tmp/restart.txt
 tmp/cache/bootsnap/load-path-cache
+=======
+tmp/*
+app/assets/images/from_users/*
+db/development.sqlite3
+log/*.*
+>>>>>>> a34a55de2d7e025ba70078879edc4df322ef75ed
