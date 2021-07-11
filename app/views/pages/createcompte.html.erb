@@ -459,11 +459,16 @@ input {
                             </div>
                         </div>
 
-                        <div class="row row-space">
+                     <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
-                                    <label class="label"style="color:black;">Quartier</label>
-                                    <input class="input--style-4" type="text" name="quartier" required autofocus>
+                                    <label for="quartier" style="color: black;">Quartier&nbsp;</label>
+                                        <select name="category_id" id="motifs">
+                                            <option value="">--Séléctionner un choix--</option>
+                                        <% @quartiers.each do |cat| %>
+                                            <option value="<%= cat.nom %>"><%= cat.nom %></option>
+                                        <% end %>
+                                    </select>
                                 </div>
                             </div>
 
@@ -511,7 +516,7 @@ input {
             </div>
         </div>
     </div>
-     <div><p>Si vous n'avez pas un compte? <a class="btn btn-dark" href="/login">Login</a></p></div>
+     <div><p>Si vous avez un compte? <a class="btn btn-dark" href="/login">Login</a></p></div>
   </BODY>
 </HTML>
 
